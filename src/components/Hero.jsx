@@ -1,4 +1,7 @@
 import React from "react";
+import Navbar from "./Navbar";
+import { Instagram, Github, Linkedin, Twitter } from 'lucide-react';
+
 
 const heroStats = [
   { title: "Projects Built", value: "8+" },
@@ -10,108 +13,126 @@ const heroStats = [
 
 const Hero = () => {
   return (
-    <section className="w-full min-h-screen bg-bg-main flex items-start lg:items-center">
-      <div className="max-w-[90rem] mx-auto w-full px-6">
+    <section className="w-full bg-[#] min-h-scree1/10bg-transparent-300 ">
+      <div className="absolute inset-0 z-0 pointer-events-none
+                bg-gradient-to-r
+                from-[#d1dce0] 
+                via-transparent
+                to-[#d1dce0]">
+      </div>
+      
+      <div className="max-w-[90rem] xl:max-w-[100rem] bg-transparent-400  relative z-10 flex justify-center h-screen mx-auto">
 
-        {/* ================= MOBILE : FOUNDER CARD ================= */}
-        <div className="lg:hidden flex flex-col items-center text-center gap-6 pt-6">
-
-          {/* Text */}
-          <div className="flex flex-col gap-2">
-            <h2 className="text-text-body text-lg font-medium">
-              Hey! I am{" "}
-              <span className="text-text-strong font-semibold">Taha</span>
-            </h2>
-
-            <h1 className="text-text-heading text-3xl font-rale font-semibold leading-tight">
-              Full-Stack Developer <br /><span className="text-accent-primary">UI/UX</span>{" "}
-              Designer
-            </h1>
-          </div>
-
-          {/* Image Card */}
-          <div className="w-[15rem] h-[19rem] rounded-xl overflow-hidden shadow-xl bg-bg-muted">
-            <img
-              src="/images/taha.png"
-              alt="Taha"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Compact Stats */}
-          <div className="flex gap-6 mt-2">
-            <div>
-              <p className="text-accent-primary text-xl font-semibold">8+</p>
-              <p className="text-xs text-accent-secondary">Projects</p>
-            </div>
-            <div>
-              <p className="text-accent-primary text-xl font-semibold">12+</p>
-              <p className="text-xs text-accent-secondary">Months</p>
-            </div>
-            <div>
-              <p className="text-accent-primary text-xl font-semibold">100+</p>
-              <p className="text-xs text-accent-secondary">Problems</p>
-            </div>
-          </div>
-        </div>
-
-        {/* ================= DESKTOP / LAPTOP ================= */}
-        <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] items-center gap-12">
-
-          {/* LEFT TEXT */}
-          <div className="flex justify-start">
-            <div className="max-w-xl flex flex-col gap-4">
-
-              <h2 className="text-text-body text-3xl font-taha font-medium">
-                Hey! I am{" "}
-                <span className="text-text-strong font-semibold">Taha</span>
-              </h2>
-
-              <h1 className="text-text-heading text-6xl font-rale font-semibold leading-tight">
-                Full-Stack Developer <br />
-                <span className="text-accent-primary">UI/UX</span>
-                <span className="text-text-muted"> Designer</span>
+        <div className="md:h-[90%] md:w-[39%]   bg-transparent-100 absolute top-1/10 -translate-y-1/10 left-0">
+          <div className="w-[85%] h-[85%] absolute top-1/10 left-1/2 -translate-x-1/2 -translate-y-1/10 bg-transparent-200">
+            <div className="absolute flex flex-col  justify-center inset-0 bg-transparent-500 space-y-6 p-8">
+              <h1 className="mb-10 ">
+                <span className="font-bit font-semibold text-xl  bg-gradient-to-r
+             from-black/95
+             via-blac/40
+             to-black/50
+             bg-clip-text
+             text-transparent tracking-tight">
+                  Hello !
+                </span>
+                <br />
+                <span className="font-mono font-bold text-7xl md:text-8xl tracking-tighter text-text-strong">
+                  I am <br />Taha Sk
+                </span>
               </h1>
 
-              <p className="text-text-body font-para text-lg leading-relaxed">
-                Building complete web experiences—from <br />
-                concept and design to deployment.
-              </p>
+              <div className="space-y-4">
+                <h2 className="font-mono text-xs uppercase
+                 bg-gradient-to-r
+             from-black
+             to-black/40
+             bg-clip-text
+             text-transparent tracking-[0.2em] ">
+                  Find Me Online
+                </h2>
 
-            </div>
-          </div>
+                <div className="flex flex-wrap gap-6 text-text-body">
 
-          {/* CENTER IMAGE */}
-          <div className="flex justify-center">
-            <div className="w-[26rem] h-[90vh] bg-bg-muted rounded-b-full shadow-2xl overflow-hidden">
-              <img
-                src="/images/taha.png"
-                alt="Taha"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
+                  <a href="#" className="flex items-center gap-2 hover:text-accent-primary transition-colors group">
+                    <Instagram size={20} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
 
-          {/* RIGHT STATS */}
-          <div className="flex justify-end">
-            <div className="flex flex-col gap-6 text-right">
-              {heroStats.map((item, index) => (
-                <div key={index}>
-                  <p className="text-accent-primary text-3xl font-rale font-semibold">
-                    {item.value}
-                  </p>
-                  <p className="text-accent-secondary font-para">
-                    {item.title}
-                  </p>
+                  </a>
+
+                  <a href="#" className="flex items-center gap-2 hover:text-accent-primary transition-colors group">
+                    <Github size={20} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
+
+                  </a>
+
+                  <a href="#" className="flex items-center gap-2 hover:text-accent-secondary transition-colors group">
+                    <Linkedin size={20} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
+
+                  </a>
+
+                  <a href="#" className="flex items-center gap-2 hover:text-accent-secondary transition-colors group">
+                    <Twitter size={20} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
+
+                  </a>
+
                 </div>
-              ))}
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div className="md:h-[85%] md:w-[30%]  mx-auto bg-transparent-100  absolute top-1/110 -translate-y-1/110 md:rounded-full shadow-2xl shadow-deep overflow-hidden  z-10">
+          <img
+            src="/images/taha.png"
+            alt="Hero"
+            className="w-full h-full  object-cover md:rounded-t-full"
+          />
+        
+        </div>
+
+        <div className="md:h-[90%] md:w-[39%]  bg-transparent-100 absolute top-1/10 -translate-y-1/10 right-0">
+          <div className="w-[85%] h-[85%] absolute top-1/10 left-1/2 -translate-x-1/2 -translate-y-1/10 bg-transparent-200">
+            <div className="absolute flex flex-col text-right  justify-center inset-0 bg-transparent-500 space-y-6 p-8">
+              <h1 className="text-right text-2xl md:text-3xl font-rale font-bold text-text-strong mt-10">Full Stack Developer <br />& UI/UX Designer</h1>
+              <p className="font-para2 text-lg">I build modern, user-focused web applications that combine clean design with reliable functionality. From crafting intuitive interfaces to developing scalable backend solutions, I focus on creating seamless digital experiences that solve real problems and perform efficiently across devices.</p>
+              <div>
+                <button className="font-rale font-semibold
+                 text-white md:text-md
+                 bg-black px-4 py-2 rounded-xl cursor-pointer 
+                 transition-all duration-150
+                  hover:bg-gray-400 hover:shadow-xl shadow-lg hover:scale-102
+                   hover:text-black ">Explore Work</button>
+              </div>
+
+
             </div>
           </div>
-
         </div>
+
+
+
+
       </div>
     </section>
   );
 };
 
 export default Hero;
+
+
+
+// <div className="flex justify-end">
+//             <div className="flex flex-col gap-6 text-right">
+//               {heroStats.map((item, index) => (
+//                 <div key={index}>
+//                   <p className="text-accent-primary text-3xl font-semibold">
+//                     {item.value}
+//                   </p>
+//                   <p className="text-accent-secondary">
+//                     {item.title}
+//                   </p>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
