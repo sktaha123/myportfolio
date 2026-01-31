@@ -1,50 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @import "tailwindcss";
-
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-rale: "Raleway", sans-serif;
-    --font-head: "Zalando Sans Expanded", sans-serif;
-    --font-taha: "Marcellus", serif;
-    --font-para: "Merriweather", serif;
-    --font-mono: "Share Tech", monospace;
-    --font-bit: "Bitcount Single", monospace;
-    --font-para2: "Fredoka", sans-serif;
+  /* Primary Heading Font: Strong, Geometric, Modern */
+  --font-heading: "Manrope", sans-serif;
 
+  /* Body/Paragraph Font: Clean, Legible, Standard */
+  --font-body: "Inter", sans-serif;
+
+  /* Code/Technical Font */
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Semantic Theme Colors */
+  --color-primary-bg: var(--bg-primary);
+  --color-primary-text: var(--text-primary);
+  --color-secondary-text: var(--text-secondary);
+  --color-primary-border: var(--border-primary);
+  --color-card-bg: var(--card-bg);
 }
 
-/* ===== MOBILE MARQUEE (GUARANTEED WORKING) ===== */
-
-.marquee-track {
-  width: 100%;
-  overflow: hidden;
+:root {
+  color-scheme: light;
+  --bg-primary: #FAFAFA;
+  --text-primary: #18181B;
+  --text-secondary: #71717A;
+  --border-primary: #E4E4E7;
+  --card-bg: #FFFFFF;
 }
 
-.marquee-content {
-  display: flex;
-  width: max-content;
-  gap: 2.5rem;
-  animation: marquee-scroll 20s linear infinite;
+:root.dark {
+  color-scheme: dark;
+  --bg-primary: #09090B;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --border-primary: #27272A;
+  --card-bg: #18181B;
 }
 
-.marquee-item {
-  flex: 0 0 auto;
-  min-width: 7rem;
-  text-align: center;
+html,
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+::selection {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
 }

@@ -1,91 +1,146 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
-const links = [
+const navItems = [
   { name: "Home", path: "/" },
+  { name: "Work", path: "/projects" },
   { name: "About", path: "/about" },
   { name: "Skills", path: "/skills" },
-  { name: "Projects", path: "/projects" },
   { name: "Experience", path: "/experience" },
-  { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved === "dark";
+      return document.documentElement.classList.contains("dark");
+    }
+    return false;
+  });
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (darkMode) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="w-full bg-gradient-to-r from-[#d1dce0]  to-[#d1dce0] absolute top-0 left-0 z-50">
-      <div className="max-w-[90rem] relative xl:max-w-[100rem] mx-auto flex justify-between md:justify-center items-center h-20 px-6">
-         <div className="absolute bottom-0 left-0 w-full h-[1px]
-                  bg-gradient-to-r
-                  from-transparent
-                  via-[#99a2a5]
-                  to-transparent"></div>
-        {/* DESKTOP NAVIGATION - Hidden on Mobile/Tablet */}
-        <nav className="hidden md:flex relative  items-center gap-8">
-          {links.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) =>
-                `text-md font-semibold cursor-pointer font-rale transition-all duration-200 ${
-                  isActive ? "text-black  " : "text-gray-500 hover:text-black"
-                }`
-              }
-            >
-              {link.name}
-              
-            </NavLink>
-          ))}
-          
-        </nav>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-300 border-b ${scrolled || mobileMenuOpen
+          ? "bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 py-4"
+          : "bg-transparent border-transparent py-6"
+          }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
-        {/* MOBILE TOGGLE - Hidden on Desktop */}
-        <div className="md:hidden flex w-full justify-end">
-          <button 
-            onClick={toggleMenu}
-            className="text-black p-2 transition-transform active:scale-90"
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          {/* Brand */}
+          <NavLink to="/" className="z-110">
+            <span className="font-heading font-extrabold text-2xl tracking-tight text-primary-text">
+              TAHA<span className="opacity-30">.</span>
+            </span>
+          </NavLink>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  className={`text-sm font-medium transition-colors ${isActive ? "text-primary-text" : "text-secondary-text hover:text-primary-text"
+                    }`}
+                >
+                  {item.name}
+                </NavLink>
+              );
+            })}
+
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-primary-text"
+              aria-label="Toggle Theme"
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
+            <NavLink
+              to="/contact"
+              className="px-5 py-2.5 bg-black dark:bg-zinc-100 text-white dark:text-black text-sm font-semibold rounded-lg hover:opacity-80 transition-colors"
+            >
+              Let's Talk
+            </NavLink>
+          </nav>
+
+          {/* Mobile Right Controls */}
+          <div className="flex items-center gap-2 md:hidden z-110">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 rounded-full text-black dark:text-white"
+              aria-label="Toggle Theme"
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 -mr-2 text-black dark:text-white"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* MOBILE MENU OVERLAY */}
-      <div onClick={() => setIsMenuOpen(!isMenuOpen)} className={`
-        fixed inset-0 bg-white/95 backdrop-blur-md z-[60] flex flex-col items-center justify-center transition-all duration-300 ease-in-out md:hidden
-        ${isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"}
-      `}>
-        {/* Close Button inside Overlay */}
-        <button 
-          onClick={toggleMenu} 
-          className="absolute top-6 right-6 text-black"
-        >
-          <X size={32} />
-        </button>
-
-        <nav className="flex flex-col items-center gap-8">
-          {links.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsMenuOpen(false)}
-              className={({ isActive }) =>
-                `text-2xl font-bold font-rale transition-colors ${
-                  isActive ? "text-black" : "text-gray-400"
-                }`
-              }
-            >
-              {link.name}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-    </header>
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-100 bg-white dark:bg-zinc-950 pt-24 px-6 md:hidden flex flex-col gap-6"
+          >
+            <nav className="flex flex-col gap-6">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-3xl font-heading font-bold text-black dark:text-white border-b border-gray-100 dark:border-zinc-800 pb-4"
+                >
+                  {item.name}
+                </NavLink>
+              ))}
+              <NavLink
+                to="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-3xl font-heading font-bold text-gray-400 dark:text-zinc-500 pb-4"
+              >
+                Get in Touch
+              </NavLink>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

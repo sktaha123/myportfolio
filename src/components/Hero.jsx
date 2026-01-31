@@ -1,123 +1,71 @@
-
-import { Instagram, Github, Linkedin, Twitter } from 'lucide-react';
-import React, { useState, useRef } from 'react';
-
-
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
-
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const containerRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
   return (
-    <section className="relative  w-full min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Background Gradient */}
-      <div className="absolute  inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#d1dce0]  to-[#d1dce0]"></div>
+    <section className="relative w-full min-h-screen bg-primary-bg overflow-hidden flex items-center justify-center pt-20">
 
-      <div className="relative z-10 w-full max-w-[90rem] mx-auto px-6 py-12 md:py-0">
+      <div className="max-w-7xl w-full mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
 
-        {/* Main Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-
-          {/* LEFT CONTENT: Name & Socials */}
-          <div className="order-2 md:-mt-25   md:order-1 md:col-span-4 flex flex-col justify-center space-y-8 text-center md:text-left">
-            <div>
-              <h1 className="mb-4">
-                <span className="font-bit font-semibold text-xl bg-gradient-to-r from-black/95 to-black/50 bg-clip-text text-transparent tracking-tight">
-                  Hello !
-                </span>
-                <br />
-                <span className="font-mono font-bold text-5xl sm:text-6xl lg:text-8xl tracking-tighter text-text-strong leading-none">
-                  I am <br />Taha Sk
-                </span>
-              </h1>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="font-mono text-xs uppercase bg-gradient-to-r from-black to-black/40 bg-clip-text text-transparent tracking-[0.2em]">
-                Find Me Online
-              </h2>
-              <div className="flex flex-wrap justify-center md:justify-start gap-6 text-text-body">
-                <a href="#" className="hover:text-accent-primary transition-colors group">
-                  <Instagram size={24} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="#" className="hover:text-accent-primary transition-colors group">
-                  <Github size={24} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="#" className="hover:text-accent-secondary transition-colors group">
-                  <Linkedin size={24} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="#" className="hover:text-accent-secondary transition-colors group">
-                  <Twitter size={24} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* CENTER CONTENT: The Image */}
-          <div className="md:-mt-25 order-1 md:order-2 md:col-span-4 flex justify-center">
-            <div
-              ref={containerRef}
-              onMouseMove={handleMouseMove}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-full md:h-[70vh] max-h-[600px] overflow-hidden rounded-full md:rounded-t-full shadow-2xl"
+        {/* Text Content */}
+        <div className="col-span-1 md:col-span-7 space-y-8 md:order-1">
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              className="font-heading text-6xl md:text-8xl font-extrabold text-primary-text leading-[0.9] tracking-tighter"
             >
-              {/* Layer 1: The Standard Photo */}
-              <img
-                src="/images/taha.png"
-                alt="Taha"
-                className="w-full h-full object-cover"
-              />
-
-              {/* Layer 2: The Skeleton Photo (The Reveal) */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  opacity: isHovering ? 1 : 0,
-                  transition: 'opacity 0.2s ease',
-                  // Point this to your new skeleton image
-                  backgroundImage: 'url(/images/skeleton.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  // We removed the invert filter because the image is already stylized
-                  WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
-                  maskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
-                }}
-              />
-            </div>
+              Digital <br /> <span className="opacity-30">Experience</span> <br /> Crafter.
+            </motion.h1>
           </div>
 
-          {/* RIGHT CONTENT: Bio & CTA */}
-          <div className="md:-mt-25 order-3 md:order-3 md:col-span-4 flex flex-col justify-center space-y-6 text-center md:text-right">
-            <h2 className="text-2xl md:text-3xl font-rale font-bold text-text-strong">
-              Full Stack Developer <br className="hidden md:block" /> & UI/UX Designer
-            </h2>
-            <p className="font-para2 text-base md:text-lg leading-relaxed text-text-body">
-              I build modern, user-focused web applications that combine clean design
-              with reliable functionality. From crafting intuitive interfaces to
-              developing scalable backend solutions.
-            </p>
-            <div>
-              <button className="font-rale font-semibold text-white bg-black px-8 py-3 rounded-xl cursor-pointer 
-                               transition-all duration-150 hover:bg-gray-400 hover:shadow-xl shadow-lg 
-                               hover:scale-105 hover:text-black">
-                Explore Projects
-              </button>
-            </div>
-          </div>
+          <motion.p
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+            className="font-body text-xl text-secondary-text max-w-lg leading-relaxed"
+          >
+            Transforming complex logic into seamless, performant, and beautiful web interfaces using modern technologies.
+          </motion.p>
 
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
+            className="flex flex-wrap gap-4"
+          >
+            <Link to="/projects" className="group px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-gray-200 transition-all hover:scale-105 active:scale-95">
+              View My Work <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link to="/contact" className="px-8 py-4 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-black dark:text-white rounded-full font-bold flex items-center gap-2 hover:border-black dark:hover:border-white transition-all hover:scale-105 active:scale-95">
+              Contact Me
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Profile Image Column */}
+        <div className="col-span-1 md:col-span-5 relative md:order-2 flex items-center justify-center">
+          <motion.div
+            initial={{ x: 50, opacity: 0, scale: 0.95 }}
+            animate={{ x: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="relative w-full max-w-sm md:max-w-md aspect-4/5 rounded-3xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-zinc-800"
+          >
+            {/* Image */}
+            <img
+              src="/images/taha.png"
+              alt="Taha Sk"
+              className="w-full h-full object-cover"
+            />
+            {/* Overlay Gradient for depth */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
+          </motion.div>
         </div>
       </div>
+
     </section>
   );
 };
