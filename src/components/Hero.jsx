@@ -1,11 +1,27 @@
-import React from "react";
+
 import { Instagram, Github, Linkedin, Twitter } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+
+
 
 const Hero = () => {
+
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const containerRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
   return (
     <section className="relative  w-full min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* Background Gradient */}
-      <div className="absolute  inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#d1dce0] via-transparent to-[#d1dce0]"></div>
+      <div className="absolute  inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#d1dce0]  to-[#d1dce0]"></div>
 
       <div className="relative z-10 w-full max-w-[90rem] mx-auto px-6 py-12 md:py-0">
         
@@ -49,14 +65,36 @@ const Hero = () => {
 
           {/* CENTER CONTENT: The Image */}
           <div className="md:-mt-25 order-1 md:order-2 md:col-span-4 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-full md:h-[70vh] max-h-[600px] overflow-hidden rounded-full md:rounded-t-full shadow-2xl">
-              <img
-                src="/images/taha.png"
-                alt="Taha"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
+      <div 
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-full md:h-[70vh] max-h-[600px] overflow-hidden rounded-full md:rounded-t-full shadow-2xl"
+      >
+        {/* The original image */}
+        <img
+          src="/images/taha.png"
+          alt="Taha"
+          className="w-full h-full object-cover"
+        />
+
+        {/* The Inversion Layer: Added without changing parent styles */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            opacity: isHovering ? 1 : 0,
+            transition: 'opacity 0.2s ease',
+            backgroundImage: 'url(/images/taha.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'invert(1)',
+            WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
+            maskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
+          }}
+        />
+      </div>
+    </div>
 
           {/* RIGHT CONTENT: Bio & CTA */}
           <div className="md:-mt-25 order-3 md:order-3 md:col-span-4 flex flex-col justify-center space-y-6 text-center md:text-right">

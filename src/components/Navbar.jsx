@@ -17,11 +17,15 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="w-full bg-gradient-to-r from-[#d1dce0] via-transparent to-[#d1dce0] absolute top-0 left-0 z-50">
-      <div className="max-w-[90rem] xl:max-w-[100rem] mx-auto flex justify-between md:justify-center items-center h-20 px-6">
-        
+    <header className="w-full bg-gradient-to-r from-[#d1dce0]  to-[#d1dce0] absolute top-0 left-0 z-50">
+      <div className="max-w-[90rem] relative xl:max-w-[100rem] mx-auto flex justify-between md:justify-center items-center h-20 px-6">
+         <div className="absolute bottom-0 left-0 w-full h-[1px]
+                  bg-gradient-to-r
+                  from-transparent
+                  via-[#99a2a5]
+                  to-transparent"></div>
         {/* DESKTOP NAVIGATION - Hidden on Mobile/Tablet */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex relative  items-center gap-8">
           {links.map((link) => (
             <NavLink
               key={link.name}
@@ -33,8 +37,10 @@ const Navbar = () => {
               }
             >
               {link.name}
+              
             </NavLink>
           ))}
+          
         </nav>
 
         {/* MOBILE TOGGLE - Hidden on Desktop */}
