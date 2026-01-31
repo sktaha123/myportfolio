@@ -24,10 +24,10 @@ const Hero = () => {
       <div className="absolute  inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#d1dce0]  to-[#d1dce0]"></div>
 
       <div className="relative z-10 w-full max-w-[90rem] mx-auto px-6 py-12 md:py-0">
-        
+
         {/* Main Grid Container */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          
+
           {/* LEFT CONTENT: Name & Socials */}
           <div className="order-2 md:-mt-25   md:order-1 md:col-span-4 flex flex-col justify-center space-y-8 text-center md:text-left">
             <div>
@@ -65,36 +65,37 @@ const Hero = () => {
 
           {/* CENTER CONTENT: The Image */}
           <div className="md:-mt-25 order-1 md:order-2 md:col-span-4 flex justify-center">
-      <div 
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-full md:h-[70vh] max-h-[600px] overflow-hidden rounded-full md:rounded-t-full shadow-2xl"
-      >
-        {/* The original image */}
-        <img
-          src="/images/taha.png"
-          alt="Taha"
-          className="w-full h-full object-cover"
-        />
+            <div
+              ref={containerRef}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+              className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-full md:h-[70vh] max-h-[600px] overflow-hidden rounded-full md:rounded-t-full shadow-2xl"
+            >
+              {/* Layer 1: The Standard Photo */}
+              <img
+                src="/images/taha.png"
+                alt="Taha"
+                className="w-full h-full object-cover"
+              />
 
-        {/* The Inversion Layer: Added without changing parent styles */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            opacity: isHovering ? 1 : 0,
-            transition: 'opacity 0.2s ease',
-            backgroundImage: 'url(/images/taha.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'invert(1)',
-            WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
-            maskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
-          }}
-        />
-      </div>
-    </div>
+              {/* Layer 2: The Skeleton Photo (The Reveal) */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  opacity: isHovering ? 1 : 0,
+                  transition: 'opacity 0.2s ease',
+                  // Point this to your new skeleton image
+                  backgroundImage: 'url(/images/skeleton.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  // We removed the invert filter because the image is already stylized
+                  WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
+                  maskImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, black 100%, transparent 100%)`,
+                }}
+              />
+            </div>
+          </div>
 
           {/* RIGHT CONTENT: Bio & CTA */}
           <div className="md:-mt-25 order-3 md:order-3 md:col-span-4 flex flex-col justify-center space-y-6 text-center md:text-right">
@@ -102,8 +103,8 @@ const Hero = () => {
               Full Stack Developer <br className="hidden md:block" /> & UI/UX Designer
             </h2>
             <p className="font-para2 text-base md:text-lg leading-relaxed text-text-body">
-              I build modern, user-focused web applications that combine clean design 
-              with reliable functionality. From crafting intuitive interfaces to 
+              I build modern, user-focused web applications that combine clean design
+              with reliable functionality. From crafting intuitive interfaces to
               developing scalable backend solutions.
             </p>
             <div>
