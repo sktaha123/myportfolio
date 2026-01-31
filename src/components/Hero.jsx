@@ -10,12 +10,12 @@ const Hero = () => {
       <div className="max-w-7xl w-full mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
 
         {/* Text Content */}
-        <div className="col-span-1 md:col-span-7 space-y-8 md:order-1">
+        <div className="mt-10 md:mt-0 col-span-1 md:col-span-7 space-y-8 md:order-1">
           <div className="overflow-hidden">
             <motion.h1
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
               className="font-heading text-6xl md:text-8xl font-extrabold text-primary-text leading-[0.9] tracking-tighter"
             >
               Digital <br /> <span className="opacity-30">Experience</span> <br /> Crafter.
@@ -25,7 +25,7 @@ const Hero = () => {
           <motion.p
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="font-body text-xl text-secondary-text max-w-lg leading-relaxed"
           >
             Transforming complex logic into seamless, performant, and beautiful web interfaces using modern technologies.
@@ -34,7 +34,7 @@ const Hero = () => {
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="flex flex-wrap gap-4"
           >
             <Link to="/projects" className="group px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-gray-200 transition-all hover:scale-105 active:scale-95">
