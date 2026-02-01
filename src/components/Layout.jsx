@@ -50,7 +50,7 @@ const Layout = () => {
       <Cursor />
       <Navbar />
 
-      <main className="relative z-10 min-h-screen overflow-x-hidden">
+      <main className="relative z-10 min-h-screen overflow-x-clip">
         <PageTransition>
           <Outlet />
         </PageTransition>
