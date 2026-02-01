@@ -85,7 +85,7 @@ const Cursor = () => {
                         <motion.div
                             key="default"
                             initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1, rotate: 10  }}
+                            animate={{ opacity: 1, scale: 1, rotate: 10 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.05 }}
                             style={{ transformOrigin: 'top left' }}
