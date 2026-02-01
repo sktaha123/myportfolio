@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* Primary Heading Font: Strong, Geometric, Modern */
-  --font-heading: "Manrope", sans-serif;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
 
-  /* Body/Paragraph Font: Clean, Legible, Standard */
-  --font-body: "Inter", sans-serif;
+  /* Body/Paragraph Font: Clean, Premium, Geometric */
+  --font-body: "Outfit", sans-serif;
 
   /* Code/Technical Font */
   --font-mono: "JetBrains Mono", monospace;
@@ -19,24 +19,53 @@
   --color-secondary-text: var(--text-secondary);
   --color-primary-border: var(--border-primary);
   --color-card-bg: var(--card-bg);
+
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 :root {
   color-scheme: light;
-  --bg-primary: #FAFAFA;
-  --text-primary: #18181B;
-  --text-secondary: #71717A;
-  --border-primary: #E4E4E7;
+  --bg-primary: #FFFFFF;
+  --bg-primary-rgb: 255, 255, 255;
+  --text-primary: #09090B;
+  --text-primary-rgb: 9, 9, 11;
+  --text-secondary: #52525B;
+  --border-primary: rgba(0, 0, 0, 0.08);
   --card-bg: #FFFFFF;
+  --accent: #000000;
+  --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 :root.dark {
   color-scheme: dark;
-  --bg-primary: #09090B;
+  --bg-primary: #030303;
+  --bg-primary-rgb: 3, 3, 3;
   --text-primary: #FAFAFA;
+  --text-primary-rgb: 250, 250, 250;
   --text-secondary: #A1A1AA;
-  --border-primary: #27272A;
-  --card-bg: #18181B;
+  --border-primary: rgba(255, 255, 255, 0.08);
+  --card-bg: #09090B;
+  --accent: #FFFFFF;
+  --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.glass-card {
+  background: rgba(var(--card-bg), 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
 }
 
 html,
@@ -45,7 +74,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
-  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,4 +82,30 @@ body {
 ::selection {
   background-color: var(--text-primary);
   color: var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img {
+    -webkit-touch-callout: none;
+  }
+
+  body {
+    padding-bottom: 90px;
+  }
+}
+
+@media (min-width: 768px) {
+
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
 }

@@ -5,63 +5,83 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="relative w-full min-h-screen bg-primary-bg overflow-hidden flex items-center justify-center pt-20">
+    <section className="relative w-full min-h-screen bg-primary-bg overflow-hidden flex items-center justify-center pt-32 pb-20">
+      {/* Background Grid Texture */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.3] dark:opacity-[0.15]">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      </div>
 
-      <div className="max-w-7xl w-full mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      {/* Ambient Glows */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-text/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-linear-to-b from-transparent via-primary-text/2 to-transparent pointer-events-none" />
 
-        {/* Text Content */}
-        <div className="mt-10 md:mt-0 col-span-1 md:col-span-7 space-y-8 md:order-1">
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="font-heading text-6xl md:text-8xl font-extrabold text-primary-text leading-[0.9] tracking-tighter"
-            >
-              Digital <br /> <span className="opacity-30">Experience</span> <br /> Crafter.
-            </motion.h1>
-          </div>
+      <div className="max-w-7xl w-full mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
 
-          <motion.p
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="font-body text-xl text-secondary-text max-w-lg leading-relaxed"
-          >
-            Transforming complex logic into seamless, performant, and beautiful web interfaces using modern technologies.
-          </motion.p>
-
+        {/* Profile Image Column - Appears First on Mobile */}
+        <div className="col-span-1 md:col-span-5 relative order-1 md:order-2 flex items-center justify-center">
           <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="flex flex-wrap gap-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="relative w-4/5 md:w-full max-w-[280px] md:max-w-sm aspect-4/5 rounded-3xl md:rounded-4xl overflow-hidden shadow-2xl border-4 border-white dark:border-zinc-800"
           >
-            <Link to="/projects" className="group px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-gray-200 transition-all hover:scale-105 active:scale-95">
-              View My Work <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link to="/contact" className="px-8 py-4 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-black dark:text-white rounded-full font-bold flex items-center gap-2 hover:border-black dark:hover:border-white transition-all hover:scale-105 active:scale-95">
-              Contact Me
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Profile Image Column */}
-        <div className="col-span-1 md:col-span-5 relative md:order-2 flex items-center justify-center">
-          <motion.div
-            initial={{ x: 50, opacity: 0, scale: 0.95 }}
-            animate={{ x: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative w-full max-w-sm md:max-w-md aspect-4/5 rounded-3xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-zinc-800"
-          >
-            {/* Image */}
             <img
               src="/images/taha.png"
               alt="Taha Sk"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-1000"
+              loading="eager"
+              fetchpriority="high"
             />
-            {/* Overlay Gradient for depth */}
-            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+          </motion.div>
+        </div>
+
+        {/* Text Content */}
+        <div className="col-span-1 md:col-span-7 space-y-8 md:space-y-10 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start">
+          <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-border bg-card-bg/50 backdrop-blur-sm shadow-sm"
+            >
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-[10px] font-mono tracking-widest uppercase text-secondary-text">Available for new projects</span>
+            </motion.div>
+
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: 80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                className="font-heading text-5xl md:text-8xl font-extrabold text-primary-text leading-[0.9] md:leading-[0.8] tracking-[-0.04em]"
+              >
+                Building <br className="hidden md:block" /> High-End <br /> <span className="text-secondary-text/30 italic font-medium">Software</span>
+              </motion.h1>
+            </div>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+            className="font-body text-lg md:text-xl text-secondary-text max-w-lg leading-relaxed md:border-l-2 border-primary-border md:pl-6"
+          >
+            Specialized in crafting performant, scalable, and aesthetically superior digital products with modern engineering.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            className="flex flex-wrap items-center justify-center md:justify-start gap-3"
+          >
+            <Link to="/projects" className="group px-6 py-3 bg-primary-text text-primary-bg rounded-xl text-sm font-semibold flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary-text/10">
+              View Work <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link to="/contact" className="px-6 py-3 bg-card-bg border border-primary-border text-primary-text rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-primary-border/50 transition-all active:scale-[0.98]">
+              Contact
+            </Link>
           </motion.div>
         </div>
       </div>

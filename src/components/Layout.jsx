@@ -2,8 +2,10 @@ import { useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Lenis from 'lenis';
 import Navbar from "./Navbar";
+import BottomNav from "./BottomNav";
 import Footer from "./Footer";
-import 'lenis/dist/lenis.css'
+import Cursor from "./Cursor";
+import 'lenis/dist/lenis.css';
 
 const Layout = () => {
   const location = useLocation();
@@ -12,14 +14,11 @@ const Layout = () => {
   // SMOOTH SCROLL IMPLEMENTATION
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      lerp: 0.1,
+      wheelMultiplier: 1,
+      gestureOrientation: 'vertical',
+      normalizeWheel: true,
+      smoothWheel: true,
     });
 
     lenisRef.current = lenis;
@@ -43,17 +42,20 @@ const Layout = () => {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
     window.scrollTo(0, 0);
-    window.history.scrollRestoration = 'manual';
   }, [location.pathname]);
 
   return (
-    <>
+    <div className="bg-primary-bg min-h-screen selection:bg-primary-text selection:text-primary-bg">
+      <Cursor />
       <Navbar />
-      <main className="relative z-10 bg-primary-bg text-primary-text min-h-screen">
+
+      <main className="relative z-10 min-h-screen">
         <Outlet />
       </main>
+
+      <BottomNav />
       <Footer />
-    </>
+    </div>
   );
 };
 
