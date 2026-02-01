@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Layout from "./components/Layout";
 
 // Lazy Load Pages
@@ -17,20 +18,31 @@ const Loading = () => (
   </div>
 );
 
+// Animated Routes Component
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/contact" element={<Contact />} />
-          </Route>
-        </Routes>
+        <AnimatedRoutes />
       </Suspense>
     </BrowserRouter>
   );

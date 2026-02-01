@@ -3,5 +3,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()]
+  plugins: [react(), tailwindcss()],
+  server: {
+    host: true, // This exposes the project to the network automatically
+    port: 5173,
+  }
 })

@@ -23,7 +23,7 @@ const Hero = () => {
             className="relative w-4/5 md:w-full max-w-[280px] md:max-w-sm aspect-4/5 rounded-3xl md:rounded-4xl overflow-hidden shadow-2xl border-4 border-white dark:border-zinc-800"
           >
             <img
-              src="/images/taha.png"
+              src="/images/taha.webp"
               alt="Taha Sk"
               className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-1000"
               loading="eager"

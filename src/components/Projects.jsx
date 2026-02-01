@@ -10,17 +10,8 @@ const projectsitems = [
         year: "2024",
         description: "A professional business platform optimized for performance and conversion-driven UI.",
         tech: ["React", "WordPress", "Tailwind"],
-        image: "/images/biznorx.png",
+        image: "/images/biznorx.webp",
         liveLink: "https://biznorx.com",
-    },
-    {
-        id: "feat-3",
-        name: "Digital Interface",
-        year: "2024",
-        description: "Minimalist user experience design focusing on precision and software aesthetics.",
-        tech: ["React", "Framer Motion", "GSAP"],
-        image: "/images/078.png",
-        liveLink: "#",
     }
 ];
 
@@ -71,9 +62,14 @@ const Projects = () => {
                                         </h3>
                                         <span className="text-[9px] font-mono text-secondary-text/60 uppercase tracking-widest mt-0.5 block">Build: {project.year}</span>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full border border-primary-border flex items-center justify-center group-hover:bg-primary-text group-hover:text-primary-bg transition-all duration-500">
-                                        <ArrowUpRight size={14} />
-                                    </div>
+                                    <a
+  href={project.liveLink}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-8 h-8 rounded-full border border-primary-border flex items-center justify-center group-hover:bg-primary-text group-hover:text-primary-bg transition-all duration-500"
+>
+  <ArrowUpRight size={14} />
+</a>
                                 </div>
 
                                 <p className="font-body text-xs text-secondary-text leading-relaxed mb-4 line-clamp-2">

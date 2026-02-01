@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import BottomNav from "./BottomNav";
 import Footer from "./Footer";
 import Cursor from "./Cursor";
+import PageTransition from "./PageTransition";
 import 'lenis/dist/lenis.css';
 
 const Layout = () => {
@@ -49,8 +50,10 @@ const Layout = () => {
       <Cursor />
       <Navbar />
 
-      <main className="relative z-10 min-h-screen">
-        <Outlet />
+      <main className="relative z-10 min-h-screen overflow-x-hidden">
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
       </main>
 
       <BottomNav />
