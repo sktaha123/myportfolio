@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const pageVariants = {
     initial: {
-        x: '100%',
+        x: '20%',
         opacity: 0,
     },
     animate: {
@@ -11,7 +11,7 @@ const pageVariants = {
         opacity: 1,
     },
     exit: {
-        x: '-100%',
+        x: '-20%',
         opacity: 0,
     },
 };

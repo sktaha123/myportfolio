@@ -48,9 +48,9 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500 border-b ${scrolled
-          ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-primary-border shadow-sm py-4"
-          : "bg-transparent border-transparent py-6"
+        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500  ${scrolled
+          ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl   py-4"
+          : "bg-transparent  py-6"
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">

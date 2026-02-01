@@ -62,7 +62,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-            className="font-body text-lg md:text-xl text-secondary-text max-w-lg leading-relaxed md:border-l-2 border-primary-border md:pl-6"
+            className="font-body text-lg md:text-xl text-secondary-text max-w-lg leading-relaxed text-center md:text-left"
           >
             Specialized in crafting performant, scalable, and aesthetically superior digital products with modern engineering.
           </motion.p>
@@ -76,7 +76,7 @@ const Hero = () => {
             <Link to="/projects" className="group px-6 py-3 bg-primary-text text-primary-bg rounded-xl text-sm font-semibold flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary-text/10">
               View Work <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/contact" className="px-6 py-3 bg-card-bg border border-primary-border text-primary-text rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-primary-border/50 transition-all active:scale-[0.98]">
+            <Link to="/contact" className="px-6 py-3 bg-card-bg border border-primary-border text-primary-text rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all active:scale-[0.98]">
               Contact
             </Link>
           </motion.div>

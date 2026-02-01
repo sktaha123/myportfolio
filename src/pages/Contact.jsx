@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Send, Phone, Instagram, Linkedin, Github } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { toast } from 'sonner';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,14 +12,48 @@ const Contact = () => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    alert("Thank you! I will get back to you soon.");
+    setIsSubmitting(true);
+
+    // --- EMAILJS CONFIGURATION ---
+    // 1. Go to https://www.emailjs.com/, sign up (free).
+    // 2. Create a "Service" (connect Gmail). Get Service ID.
+    // 3. Create a "Email Template". Get Template ID.
+    //    - In template, verify variable names match: {{name}}, {{email}}, {{subject}}, {{message}}
+    // 4. Get your "Public Key" from Account > General.
+
+    // Environment variables from .env
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    const templateParams = {
+      name: formData.name,      // Matches {{name}}
+      email: formData.email,    // Matches {{email}}
+      subject: formData.subject, // Matches {{subject}}
+      message: formData.message, // Matches {{message}}
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        toast.success("Thanks! Your message has been sent successfully.");
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      })
+      .catch((err) => {
+        console.error('FAILED...', err);
+        toast.error("Failed to send message. Please try again or email me directly.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -52,7 +88,7 @@ const Contact = () => {
               {/* Phone */}
               <div>
                 <h3 className="text-[10px] font-mono text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-1">Phone / WhatsApp</h3>
-                <a href="tel:+918286265286" className="text-lg md:text-xl font-bold text-black dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors flex items-center gap-2.5 font-heading">
+                <a href="https://wa.me/918286265286" target="_blank" rel="noreferrer" className="text-lg md:text-xl font-bold text-black dark:text-white hover:text-green-600 dark:hover:text-green-400 transition-colors flex items-center gap-2.5 font-heading">
                   <Phone className="inline-block" size={20} /> +91 8286265286
                 </a>
               </div>
@@ -151,9 +187,10 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold text-sm hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 group shadow-xl"
+                disabled={isSubmitting}
+                className="w-full py-3 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold text-sm hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 group shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Send Message <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} className={`group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isSubmitting ? 'hidden' : 'block'}`} />
               </button>
             </form>
           </motion.div>

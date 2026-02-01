@@ -1,24 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Filter, Search } from 'lucide-react';
-
-const allProjectsData = [
-  {
-    id: "proj-1",
-    name: "BiznorX Website",
-    year: "2024",
-    category: "website",
-    description: "Business website built for real-world usage, focusing on performance, clean UI, and responsive design. Responsibilities included website structure, UI development, deployment setup, and client-ready implementation.",
-    tech: ["React", "TailwindCSS", "JS"],
-    image: "/images/biznorx.webp",
-    liveLink: "https://biznorx.com",
-    githubLink: "#",
-  }
-];
-
-const categoryTabs = ["All", "website"];
+import { Github, ExternalLink, Filter, Search, ArrowUpRight, FolderOpen } from 'lucide-react';
+import { allProjectsData, categoryTabs } from '../data/projects';
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -30,137 +17,145 @@ const Projects = () => {
   });
 
   return (
-    <div className=" relative min-h-screen bg-primary-bg pt-24 md:pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-primary-bg pt-24 md:pt-32 pb-20 px-6">
       <div className="max-w-[90rem] mx-auto">
+
         {/* Header Section */}
-        <div className="mb-8">
-          <h1 className="font-heading text-3xl md:text-5xl font-bold text-black dark:text-white mb-6">
-            My Projects
-          </h1>
-          <p className="font-body text-lg text-gray-600 dark:text-zinc-400 max-w-2xl">
-            A complete archive of my works, side projects, and design experiments.
-          </p>
+        <div className="mb-12 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <h1 className="font-heading text-4xl md:text-6xl font-bold text-black dark:text-white mb-4 tracking-tight">
+               All  Works
+            </h1>
+            <p className="font-body text-xl text-secondary-text max-w-2xl">
+              A collection of digital products, experiments, and open source contributions.
+            </p>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-zinc-900 rounded-full text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">
+            <FolderOpen size={14} />
+            <span>{filteredProjects.length} Projects Found</span>
+          </div>
         </div>
-      </div>
 
-      {/* Controls Section (Filter & Search) - Full Width Sticky */}
-<div className="sticky top-[72px] z-40 bg-white/80 dark:bg-zinc-900 border-y border-gray-100 dark:border-zinc-800 mb-8 -mx-6 px-6 backdrop-blur-md">        <div className="max-w-[90rem] mx-auto py-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            {/* Categories */}
-            <div className="flex flex-wrap gap-2">
-              {categoryTabs.map((cat) => (
-                <button
-                  key={`cat-tab-${cat}`}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border ${selectedCategory === cat
-                    ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-md shadow-black/5"
-                    : "bg-white dark:bg-zinc-900 text-gray-600 dark:text-zinc-400 border-gray-200 dark:border-zinc-800 hover:border-black dark:hover:border-white"
-                    }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+        {/* Controls Section (Filter & Search) - Sticky */}
+        <div className="sticky top-[67px] z-40 bg-white/80 dark:bg-zinc-900/80 border-y 2xl:border border-gray-100 dark:border-zinc-800 mb-12 -mx-6 2xl:mx-auto px-6 backdrop-blur-xl 2xl:max-w-[90rem] 2xl:rounded-2xl transition-all duration-300">
+          <div className="max-w-[90rem] mx-auto py-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
 
-            {/* Search */}
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500" size={14} />
-              <input
-                type="text"
-                placeholder="Search projects..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-200 dark:border-zinc-800 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-all bg-white dark:bg-zinc-900 text-black dark:text-white text-sm font-body shadow-sm"
-              />
+              {/* Categories */}
+              <div className="flex flex-wrap gap-2 pb-1 md:pb-0">
+                {categoryTabs.map((cat) => (
+                  <button
+                    key={`cat-tab-${cat}`}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${selectedCategory === cat
+                      ? "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-lg shadow-black/10 scale-105"
+                      : "bg-transparent text-gray-500 dark:text-zinc-500 border-transparent hover:bg-gray-100 dark:hover:bg-zinc-800"
+                      }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* Search */}
+              <div className="relative w-full md:w-80 shrink-0">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 transition-colors group-focus-within:text-black dark:group-focus-within:text-white" size={16} />
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-4 py-2.5 rounded-full bg-gray-50 dark:bg-zinc-800/50 border border-gray-200 dark:border-zinc-700 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-all text-black dark:text-white text-sm font-medium shadow-inner"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="max-w-[90rem] mx-auto">
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id || project.name}
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="bg-white dark:bg-zinc-900/50 rounded-2xl overflow-hidden border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col"
-              >
-                {/* Image Area */}
-                <div className="relative w-full aspect-video bg-gray-100 dark:bg-zinc-900 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+        >
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id || project.name}
+              onClick={() => navigate(`/projects/${project.id}`)}
+              className="group relative bg-white dark:bg-zinc-900 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-zinc-800 cursor-pointer shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500"
+            >
+              {/* Image Area */}
+              <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-zinc-800">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/40 dark:bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                    <a
-                      href={project.liveLink}
-                      className="p-3 bg-white dark:bg-zinc-100 rounded-full hover:scale-110 transition-transform text-black dark:text-zinc-900"
-                      title="View Live"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* Top Right Action */}
+                <div className="absolute top-4 right-4 translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="p-3 bg-white dark:bg-zinc-950 rounded-full text-black dark:text-white shadow-lg">
+                    <ArrowUpRight size={20} />
                   </div>
+                </div>
 
-                  {/* Category Tag Badge */}
-                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-wider text-black dark:text-white shadow-sm border border-transparent dark:border-zinc-800">
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-wider text-black dark:text-white shadow-sm">
                     {project.category}
-                  </div>
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 md:p-8 flex flex-col h-[220px]">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="font-heading text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-text transition-colors">
+                    {project.name}
+                  </h3>
+                  <span className="text-xs font-mono font-bold text-gray-400 dark:text-zinc-600 border border-gray-100 dark:border-zinc-800 px-2 py-1 rounded">
+                    {project.year}
+                  </span>
                 </div>
 
-                {/* Content Area */}
-                <div className="p-5 flex-1 flex flex-col">
-                  <div className="flex items-start justify-between mb-1.5">
-                    <div>
-                      <h3 className="font-heading text-xl font-bold text-gray-900 dark:text-zinc-100 group-hover:text-black dark:group-hover:text-white transition-colors tracking-tight">
-                        {project.name}
-                      </h3>
-                      <span className="text-[9px] font-mono text-secondary-text/60 uppercase tracking-widest mt-0.5 block">Build: {project.year}</span>
-                    </div>
-                  </div>
+                <p className="font-body text-sm text-gray-500 dark:text-zinc-400 leading-relaxed line-clamp-3 mb-6 flex-1">
+                  {project.description}
+                </p>
 
-                  <p className="font-body text-gray-600 dark:text-zinc-400 mb-4 text-xs leading-relaxed line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  <div className="mt-auto">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((t, idx) => (
-                        <span key={`tech-tag-${project.id}-${idx}`} className="px-2 py-1 bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-md text-xs font-mono text-gray-500 dark:text-zinc-500">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.slice(0, 3).map((t, idx) => (
+                    <span key={idx} className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-800 rounded-md text-[10px] uppercase font-bold text-gray-500 dark:text-zinc-500 border border-gray-100 dark:border-zinc-800">
+                      {t}
+                    </span>
+                  ))}
+                  {project.tech.length > 3 && (
+                    <span className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-800 rounded-md text-[10px] font-bold text-gray-400 dark:text-zinc-600">
+                      +{project.tech.length - 3}
+                    </span>
+                  )}
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
-          <div className="py-20 text-center">
-            <div className="inline-block p-4 rounded-full bg-gray-100 dark:bg-zinc-900 mb-4 text-gray-400 dark:text-zinc-600">
-              <Filter size={32} />
+          <div className="py-32 flex flex-col items-center justify-center text-center opacity-60">
+            <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-900 rounded-full flex items-center justify-center mb-6">
+              <Filter size={32} className="text-gray-400 dark:text-zinc-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-700 dark:text-zinc-400">No projects found.</h3>
-            <p className="text-gray-500 dark:text-zinc-500">Try adjusting your search or filters.</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No projects found</h3>
+            <p className="text-gray-500 dark:text-zinc-400 max-w-xs mx-auto">
+              We couldn't find any projects matching your search or filter.
+            </p>
           </div>
         )}
 
       </div>
-    </div>
+    </div >
   );
 };
 

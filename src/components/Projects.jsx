@@ -1,88 +1,52 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
-const projectsitems = [
-    {
-        id: "feat-1",
-        name: "BiznorX Website",
-        year: "2024",
-        description: "A professional business platform optimized for performance and conversion-driven UI.",
-        tech: ["React", "WordPress", "Tailwind"],
-        image: "/images/biznorx.webp",
-        liveLink: "https://biznorx.com",
-    }
-];
+import { Link, useNavigate } from 'react-router-dom';
+import { allProjectsData } from '../data/projects';
 
 const Projects = () => {
+    const navigate = useNavigate();
+    // Use first 3 projects for the featured section
+    const featuredProjects = allProjectsData.slice(0, 3);
+
     return (
-        <section className="w-full py-32 px-6 bg-white dark:bg-zinc-950 relative overflow-hidden" id="projects">
-            <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header */}
-                <div className="flex flex-col items-start md:flex-row md:items-end justify-between mb-16 border-b border-primary-border pb-8">
+        <section className="w-full py-20 px-6 bg-white dark:bg-zinc-950">
+            <div className="max-w-[90rem] mx-auto">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                     <div>
-                        <h2 className="font-heading text-4xl md:text-5xl font-bold text-black dark:text-white mb-4">Selected Works</h2>
-                        <p className="font-body text-xl text-gray-500 dark:text-zinc-400 max-w-lg">
-                            A collection of projects where design meets engineering.
-                        </p>
+                        <h2 className="font-heading text-3xl md:text-5xl font-bold text-black dark:text-white">My Works</h2>
                     </div>
-                    <Link
-                        to="/projects"
-                        onClick={() => window.scrollTo(0, 0)}
-                        className="mt-6 md:mt-0 text-[10px] font-bold uppercase tracking-[0.2em] text-primary-text hover:opacity-70 transition-all inline-flex items-center gap-2 w-fit"
-                    >
-                        View Archive <ArrowUpRight size={14} />
+                    <Link to="/projects" onClick={() => window.scrollTo(0, 0)} className="group flex items-center gap-2 text-sm font-bold text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">
+                        View All Projects <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                 </div>
 
-                {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projectsitems.map((project) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {featuredProjects.map((project) => (
                         <div
                             key={project.id}
-                            className="group cursor-pointer flex flex-col h-full bg-card-bg border border-primary-border rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500"
+                            onClick={() => navigate(`/projects/${project.id}`)}
+                            className="group cursor-pointer flex flex-col gap-4"
                         >
-                            {/* Image Box */}
-                            <div className="relative aspect-video overflow-hidden border-b border-primary-border">
+                            <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800">
                                 <img
                                     src={project.image}
                                     alt={project.name}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                                <div className="absolute top-4 right-4 p-2 bg-white dark:bg-zinc-950 rounded-full text-black dark:text-white opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                                    <ArrowUpRight size={18} />
+                                </div>
                             </div>
 
-                            {/* Text Content */}
-                            <div className="p-6 flex flex-col flex-1">
-                                <div className="flex justify-between items-start mb-3">
-                                    <div>
-                                        <h3 className="font-heading text-lg font-bold text-primary-text tracking-tight">
-                                            {project.name}
-                                        </h3>
-                                        <span className="text-[9px] font-mono text-secondary-text/60 uppercase tracking-widest mt-0.5 block">Build: {project.year}</span>
-                                    </div>
-                                    <a
-  href={project.liveLink}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-8 h-8 rounded-full border border-primary-border flex items-center justify-center group-hover:bg-primary-text group-hover:text-primary-bg transition-all duration-500"
->
-  <ArrowUpRight size={14} />
-</a>
-                                </div>
-
-                                <p className="font-body text-xs text-secondary-text leading-relaxed mb-4 line-clamp-2">
-                                    {project.description}
+                            {/* Short Title & Subtitle Left Aligned */}
+                            <div className="space-y-1">
+                                <h3 className="text-lg font-bold text-black dark:text-white group-hover:text-gray-700 dark:group-hover:text-zinc-300 transition-colors">
+                                    {project.name}
+                                </h3>
+                                <p className="text-xs text-gray-400 dark:text-zinc-500 font-mono uppercase tracking-wider">
+                                    {project.category}
                                 </p>
-
-                                <div className="mt-auto flex flex-wrap gap-1.5">
-                                    {project.tech.map((t, idx) => (
-                                        <span key={`${t}-${idx}`} className="text-[10px] font-mono font-medium text-secondary-text border border-primary-border px-2.5 py-1 rounded-md bg-white dark:bg-zinc-900/50 uppercase tracking-wider">
-                                            {t}
-                                        </span>
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     ))}
