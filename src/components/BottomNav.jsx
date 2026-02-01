@@ -15,9 +15,9 @@ const BottomNav = () => {
     const location = useLocation();
 
     return (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-200 pointer-events-none">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-200 pointer-events-none pb-4 px-4">
             <div className="w-full pointer-events-auto">
-                <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-t border-primary-border shadow-2xl flex items-center justify-around px-2 pt-2 pb-6 relative overflow-hidden">
+                <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-primary-border/50 shadow-2xl shadow-black/10 dark:shadow-black/30 flex items-center justify-around px-3 py-3 relative overflow-hidden rounded-3xl">
                     {/* Background Glow */}
                     <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
                         <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary-text rounded-full blur-2xl" />

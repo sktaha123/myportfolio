@@ -55,7 +55,7 @@ const Projects = () => {
         </div>
 
         {/* Controls Section (Filter & Search) - Full Width */}
-        <div className="sticky top-17 z-40 bg-white rounded-2xl dark:bg-zinc-950  border-y border-gray-100 dark:border-zinc-800 mb-8 -mx-6 px-6">
+        <div className="sticky top-17 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md  border-y border-gray-100 dark:border-zinc-800 mb-8 -mx-6 px-6">
           <div className="max-w-7xl mx-auto py-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               {/* Categories */}
