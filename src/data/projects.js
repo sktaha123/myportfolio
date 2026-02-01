@@ -1,11 +1,11 @@
 export const allProjectsData = [
     {
         id: "proj-1",
-        name: "BiznorX Website",
-        year: "2024",
+        name: "biznorx.com",
+        year: "2026",
         category: "website",
-        description: "Business website built for real-world usage, focusing on performance, clean UI, and responsive design. Responsibilities included website structure, UI development, deployment setup, and client-ready implementation.",
-        tech: ["React", "TailwindCSS", "JS"],
+        description: "biznorx is a recruitment and workforce solutions platform designed to help organizations make confident hiring decisions. By combining structured evaluation, business intelligence, and human judgment, biznorx ensures that every recruitment outcome aligns with both immediate role requirements and long-term organizational goals. Operating across India and the UAE, biznorx supports companies at every stage of growth.",
+        tech: ["React", "TailwindCSS", "JS", "Framer-Motion", "UI Libraries"],
         image: "/images/biznorx.webp",
         liveLink: "https://biznorx.com",
         githubLink: "#",
