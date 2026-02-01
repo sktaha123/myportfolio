@@ -112,7 +112,7 @@ const Projects = () => {
               {/* Content Area */}
               <div className="py-2 px-1 md:p-8 flex flex-col md:h-[220px]">
                 <div className="flex justify-between items-start mb-1 md:mb-4">
-                  <h3 className="font-heading text-lg md:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-text transition-colors">
+                  <h3 className="font-heading text-md md:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-text transition-colors">
                     {project.name}
                   </h3>
                   <span className="hidden md:inline-block text-xs font-mono font-bold text-gray-400 dark:text-zinc-600 border border-gray-100 dark:border-zinc-800 px-2 py-1 rounded">
