@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const AboutPreview = () => {
     return (
-        <section className="w-full py-32 px-6 bg-primary-bg border-t border-primary-border overflow-hidden">
+        <section className="w-full py-32 px-6 bg-primary-bg border-t border-primary-border overflow-hidden relative">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
                     <motion.div
@@ -29,8 +29,8 @@ const AboutPreview = () => {
                             </p>
                         </div>
 
-                        <Link to="/about" className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary-text">
-                            <span className="border-b-2 border-primary-border group-hover:border-primary-text transition-all pb-1">Discover the Journey</span>
+                        <Link to="/about" className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary-text hover:opacity-70 transition-opacity">
+                            <span className="pb-1">Discover the Journey</span>
                             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </motion.div>

@@ -34,13 +34,13 @@ const experienceData = [
 
 const Experience = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950 pt-40 md:pt-52 pb-20 px-6">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 pt-24 md:pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
 
-        <h1 className="font-heading text-5xl md:text-7xl font-bold text-black dark:text-white mb-6">
+        <h1 className="font-heading text-3xl md:text-5xl font-bold text-black dark:text-white mb-6">
           Experience.
         </h1>
-        <p className="font-body text-xl text-gray-600 dark:text-zinc-400 max-w-2xl mb-16">
+        <p className="font-body text-xl text-gray-600 dark:text-zinc-400 max-w-2xl mb-16 px-1">
           A history of my work, teaching, and creative endeavors.
         </p>
 

@@ -39,7 +39,7 @@ const Projects = () => {
                     <Link
                         to="/projects"
                         onClick={() => window.scrollTo(0, 0)}
-                        className="mt-6 md:mt-0 text-xs font-bold uppercase tracking-widest border-b border-primary-text text-primary-text pb-1 hover:text-secondary-text hover:border-secondary-text transition-all inline-flex items-center gap-2 w-fit"
+                        className="mt-6 md:mt-0 text-[10px] font-bold uppercase tracking-[0.2em] text-primary-text hover:opacity-70 transition-all inline-flex items-center gap-2 w-fit"
                     >
                         View Archive <ArrowUpRight size={14} />
                     </Link>

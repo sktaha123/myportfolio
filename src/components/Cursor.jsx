@@ -25,9 +25,11 @@ const Cursor = () => {
                 target.tagName === 'TEXTAREA' ||
                 target.isContentEditable;
 
-            if (isTextField) setCursorType('text');
-            else if (isClickable) setCursorType('pointer');
-            else setCursorType('default');
+            let newType = 'default';
+            if (isTextField) newType = 'text';
+            else if (isClickable) newType = 'pointer';
+
+            setCursorType(prev => prev !== newType ? newType : prev);
         };
 
         window.addEventListener('mousemove', moveCursor, { passive: true });
@@ -83,7 +85,7 @@ const Cursor = () => {
                         <motion.div
                             key="default"
                             initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1, rotate: -15 }}
+                            animate={{ opacity: 1, scale: 1, rotate: 10  }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.05 }}
                             style={{ transformOrigin: 'top left' }}

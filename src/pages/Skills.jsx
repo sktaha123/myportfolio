@@ -39,12 +39,12 @@ const skillCategories = [
 
 const Skills = () => {
   return (
-    <div className="min-h-screen bg-primary-bg pt-40 md:pt-52 pb-20 px-6">
+    <div className="min-h-screen bg-primary-bg pt-24 md:pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="mb-16 md:mb-24 text-center md:text-left">
-          <h1 className="font-heading text-5xl md:text-7xl font-bold text-black dark:text-white mb-6">
+          <h1 className="font-heading text-3xl md:text-5xl font-bold text-black dark:text-white mb-6">
             Technical Arsenal.
           </h1>
           <p className="font-body text-xl text-secondary-text max-w-2xl">

@@ -14,7 +14,7 @@ const Layout = () => {
   // SMOOTH SCROLL IMPLEMENTATION
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: 0.15,
       wheelMultiplier: 1,
       gestureOrientation: 'vertical',
       normalizeWheel: true,

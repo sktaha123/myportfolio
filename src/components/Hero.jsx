@@ -7,13 +7,10 @@ const Hero = () => {
   return (
     <section className="relative w-full min-h-screen bg-primary-bg overflow-hidden flex items-center justify-center pt-32 pb-20">
       {/* Background Grid Texture */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.3] dark:opacity-[0.15]">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.9] dark:opacity-[0.8]">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] bg-size-[40px_40px] text-primary-text/10" />
       </div>
 
-      {/* Ambient Glows */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-text/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-linear-to-b from-transparent via-primary-text/2 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl w-full mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
 
@@ -30,7 +27,7 @@ const Hero = () => {
               alt="Taha Sk"
               className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-1000"
               loading="eager"
-              fetchpriority="high"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
           </motion.div>
@@ -54,7 +51,7 @@ const Hero = () => {
                 initial={{ y: 80, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="font-heading text-5xl md:text-8xl font-extrabold text-primary-text leading-[0.9] md:leading-[0.8] tracking-[-0.04em]"
+                className="font-heading text-4xl md:text-7xl font-extrabold text-primary-text leading-[0.9] md:leading-[0.8] tracking-[-0.04em]"
               >
                 Building <br className="hidden md:block" /> High-End <br /> <span className="text-secondary-text/30 italic font-medium">Software</span>
               </motion.h1>

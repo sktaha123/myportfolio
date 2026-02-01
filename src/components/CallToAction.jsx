@@ -43,7 +43,7 @@ const CallToAction = () => {
                             </div>
 
                             <div className="space-y-4">
-                                <h2 className="font-heading text-5xl md:text-7xl font-extrabold text-primary-text tracking-[-0.04em] leading-[0.9]">
+                                <h2 className="font-heading text-4xl md:text-6xl font-extrabold text-primary-text tracking-[-0.04em] leading-[0.9]">
                                     Let's Build <br />
                                     <span className="text-secondary-text/30 dark:text-secondary-text/20">Something</span> <br />
                                     Extraordinary.
