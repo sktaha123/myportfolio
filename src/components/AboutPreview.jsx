@@ -8,7 +8,7 @@ const AboutPreview = () => {
             <div className="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
                 {/* 1. Text Content Side */}
-                <div className="order-2 lg:order-1 space-y-8">
+                <div className="order-1 lg:order-2 space-y-8">
                     <div className="space-y-4">
                         <span className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500">The Journey</span>
                         <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-black dark:text-white leading-tight">
@@ -44,7 +44,7 @@ const AboutPreview = () => {
                 </div>
 
                 {/* 2. Visual / Code Block Side */}
-                <div className="order-1 lg:order-2 relative">
+                <div className="order-2 lg:order-1 relative">
                     <div className="relative rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-gray-100 dark:border-zinc-800 p-8 md:p-12 shadow-2xl shadow-gray-200 dark:shadow-black/50">
                         {/* Decorative IDE Header */}
                         <div className="flex items-center gap-2 mb-8 opacity-50">
