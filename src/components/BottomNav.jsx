@@ -7,6 +7,7 @@ const mobileNavItems = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'Work', path: '/projects', icon: Briefcase },
     { name: 'Skills', path: '/skills', icon: Cpu },
+    { name: 'Exp.', path: '/experience', icon: Layers },
     { name: 'About', path: '/about', icon: User },
     { name: 'Contact', path: '/contact', icon: Mail },
 ];
