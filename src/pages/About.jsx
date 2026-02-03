@@ -1,15 +1,39 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, GraduationCap, Star, CheckCircle2, User, Heart, Mic } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Award, GraduationCap, Star, CheckCircle2, User, Heart, Mic, ChevronDown, ChevronUp } from 'lucide-react';
+
+const educationData = [
+  {
+    year: '2026 — Present',
+    degree: 'Bachelor of Computer Science',
+    institution: 'B.K. Birla College, Kalyan',
+    tags: ["Sem 1: 9.45", "Sem 2: 9.00", "Sem 3: 9.25"]
+  },
+  {
+    year: '2023 — 2024',
+    degree: 'HSC Science',
+    institution: 'Dar-Ul-Rehmat Trust English High School',
+    tags: ["Percentage: 90.50%", "Science"]
+  }
+];
+
+const certificationsData = [
+  { name: "Full Stack Web Development", issuer: "Udemy / Meta", date: "2024", image: "/images/cert-fullstack.png" },
+  { name: "React Advanced Patterns", issuer: "Frontend Masters", date: "2023", image: "/images/cert-react.png" },
+  { name: "UI/UX Design Essentials", issuer: "Google / Coursera", date: "2023", image: "/images/cert-uiux.png" },
+  { name: "JavaScript Algorithms", issuer: "FreeCodeCamp", date: "2023", image: "/images/cert-js.png" },
+];
 
 const About = () => {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <div className="min-h-screen bg-primary-bg pt-24 md:pt-32 pb-20 px-6">
       <div className="max-w-[90rem] mx-auto">
 
         {/* Header Section */}
         <div className="mb-16 md:mb-24 text-center">
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-black dark:text-white mb-6">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
             About Me.
           </h1>
           <p className="font-body text-xl text-secondary-text max-w-2xl mx-auto">
@@ -105,93 +129,145 @@ const About = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="col-span-1 md:col-span-6 lg:col-span-6 bg-white dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 rounded-[2rem] p-8 md:p-10"
+            transition={{ delay: 0.4, layout: { type: "spring", bounce: 0.2, duration: 0.6 } }}
+            layout
+            className="col-span-1 md:col-span-6 lg:col-span-6 bg-white dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 rounded-[2rem] p-8 md:p-10 flex flex-col"
           >
-            <div className="flex items-center gap-3 mb-8">
+            <motion.div layout="position" className="flex items-center gap-3 mb-8">
               <div className="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600 dark:text-orange-400">
                 <GraduationCap size={20} />
               </div>
               <h2 className="font-heading text-2xl font-bold text-black dark:text-white">Education</h2>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col sm:flex-row gap-6 sm:items-start">
-              <div className="flex-1">
-                <span className="inline-block px-3 py-1 mb-3 text-[10px] font-bold uppercase tracking-widest bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-full">
-                  2023 — Present
-                </span>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Bachelor of Computer Science</h3>
-                <p className="text-gray-500 dark:text-zinc-400 text-sm">B.K. Birla College, Kalyan</p>
-              </div>
+            <div className="flex flex-col gap-8">
+              <AnimatePresence mode="popLayout">
+                {educationData.slice(0, showAll ? educationData.length : 1).map((edu, index) => (
+                  <motion.div
+                    layout
+                    key={index}
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.2 } }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="flex flex-col sm:flex-row gap-6 sm:items-start border-b last:border-0 border-gray-100 dark:border-zinc-800 pb-8 last:pb-0"
+                  >
+                    <motion.div layout="position" className="flex-1">
+                      <span className="inline-block px-3 py-1 mb-3 text-[10px] font-bold uppercase tracking-widest bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-full">
+                        {edu.year}
+                      </span>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{edu.degree}</h3>
+                      <p className="text-gray-500 dark:text-zinc-400 text-sm">{edu.institution}</p>
+                    </motion.div>
 
-              <div className="flex flex-wrap sm:flex-col gap-2">
-                {["Sem 1: 9.45", "Sem 2: 9.00", "Sem 3: 9.25"].map(tag => (
-                  <span key={tag} className="px-3 py-1.5 bg-gray-50 dark:bg-zinc-800 rounded-lg text-xs font-mono font-medium text-gray-600 dark:text-zinc-300 border border-gray-100 dark:border-zinc-700 text-center">
-                    {tag}
-                  </span>
+                    <motion.div layout="position" className="flex flex-wrap sm:flex-col gap-2">
+                      {edu.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1.5 bg-gray-50 dark:bg-zinc-800 rounded-lg text-xs font-mono font-medium text-gray-600 dark:text-zinc-300 border border-gray-100 dark:border-zinc-700 text-center">
+                          {tag}
+                        </span>
+                      ))}
+                    </motion.div>
+                  </motion.div>
                 ))}
-              </div>
+              </AnimatePresence>
             </div>
+
+            {educationData.length > 1 && (
+              <motion.button
+                layout
+                onClick={() => setShowAll(!showAll)}
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                className="mt-6 w-full py-3 flex items-center justify-center gap-2 text-sm font-bold text-gray-500 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/10 rounded-xl transition-colors group"
+              >
+                {showAll ? "See Less" : "See More"}
+                {showAll ? (
+                  <ChevronUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+                ) : (
+                  <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
+                )}
+              </motion.button>
+            )}
           </motion.div>
 
           {/* Certifications - List Card (Col Span 6) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="col-span-1 md:col-span-6 lg:col-span-6 bg-white dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 rounded-[2rem] p-8 md:p-10"
+            transition={{ delay: 0.5, layout: { type: "spring", bounce: 0.2, duration: 0.6 } }}
+            layout
+            className="col-span-1 md:col-span-6 lg:col-span-6 bg-white dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 rounded-[2rem] p-8 md:p-10 flex flex-col"
           >
-            <div className="flex items-center gap-3 mb-8">
+            <motion.div layout="position" className="flex items-center gap-3 mb-8">
               <div className="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600 dark:text-purple-400">
                 <Award size={20} />
               </div>
               <h2 className="font-heading text-2xl font-bold text-black dark:text-white">Certifications</h2>
+            </motion.div>
+
+            <div className="flex flex-col gap-4">
+              <AnimatePresence mode="popLayout">
+                {certificationsData.slice(0, showAll ? certificationsData.length : 2).map((cert, i) => (
+                  <motion.a
+                    layout
+                    key={i}
+                    href={cert.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.2 } }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                    className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-zinc-800/50 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer"
+                  >
+                    <motion.div layout="position">
+                      <h4 className="font-bold text-sm text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{cert.name}</h4>
+                      <p className="text-xs text-gray-500 dark:text-zinc-500 mt-1">{cert.issuer}</p>
+                    </motion.div>
+                    <motion.span layout="position" className="text-xs font-mono font-medium text-gray-400">{cert.date}</motion.span>
+                  </motion.a>
+                ))}
+              </AnimatePresence>
             </div>
 
-            <div className="space-y-4">
-              {[
-                { name: "Full Stack Web Development", issuer: "Udemy / Meta", date: "2024", image: "/images/cert-fullstack.png" },
-                { name: "React Advanced Patterns", issuer: "Frontend Masters", date: "2023", image: "/images/cert-react.png" },
-                { name: "UI/UX Design Essentials", issuer: "Google / Coursera", date: "2023", image: "/images/cert-uiux.png" }
-              ].map((cert, i) => (
-                <a
-                  key={i}
-                  href={cert.image}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-zinc-800/50 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer"
-                >
-                  <div>
-                    <h4 className="font-bold text-sm text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{cert.name}</h4>
-                    <p className="text-xs text-gray-500 dark:text-zinc-500 mt-1">{cert.issuer}</p>
-                  </div>
-                  <span className="text-xs font-mono font-medium text-gray-400">{cert.date}</span>
-                </a>
-              ))}
-            </div>
+            {certificationsData.length > 2 && (
+              <motion.button
+                layout
+                onClick={() => setShowAll(!showAll)}
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                className="mt-6 w-full py-3 flex items-center justify-center gap-2 text-sm font-bold text-gray-500 dark:text-zinc-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/10 rounded-xl transition-colors group"
+              >
+                {showAll ? "See Less" : "See More"}
+                {showAll ? (
+                  <ChevronUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+                ) : (
+                  <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
+                )}
+              </motion.button>
+            )}
           </motion.div>
 
           {/* Interests - Horizontal Strip (Col Span 12) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ opacity: { delay: 0.6 }, layout: { type: "spring", bounce: 0.2, duration: 0.6 } }}
+            layout
             className="col-span-1 md:col-span-6 lg:col-span-12 bg-gradient-to-r from-gray-50 to-white dark:from-zinc-900 dark:to-zinc-950 border border-gray-100 dark:border-zinc-800 rounded-[2rem] p-8 flex flex-col md:flex-row items-center justify-between gap-6"
           >
-            <div className="flex items-center gap-4">
+            <motion.div layout="position" className="flex items-center gap-4">
               <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-full text-red-500">
                 <Heart size={20} fill="currentColor" />
               </div>
               <span className="font-heading text-lg font-bold text-gray-900 dark:text-white">Beyond Code</span>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-wrap justify-center gap-3">
+            <motion.div layout="position" className="flex flex-wrap justify-center gap-3">
               {["Photography", "Physics", "Teaching", "Podcasts", "Design Systems"].map(interest => (
                 <span key={interest} className="px-4 py-2 bg-white dark:bg-zinc-800 shadow-sm border border-gray-100 dark:border-zinc-700 rounded-full text-sm font-medium text-gray-600 dark:text-zinc-300">
                   {interest}
                 </span>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>

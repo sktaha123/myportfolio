@@ -23,7 +23,7 @@ const Projects = () => {
         {/* Header Section */}
         <div className="mb-12 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h1 className="font-heading text-4xl md:text-6xl font-bold text-black dark:text-white mb-4 tracking-tight">
+            <h1 className="font-heading text-4xl md:text-4xl font-bold text-black dark:text-white mb-4 tracking-tight">
               All  Works
             </h1>
             <p className="font-body text-xl text-secondary-text max-w-2xl">

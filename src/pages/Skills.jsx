@@ -53,7 +53,7 @@ const Skills = () => {
         {/* Header */}
         <div className="mb-16 md:mb-10 flex flex-col md:flex-row items-end justify-between gap-6">
           <div>
-            <h1 className="font-heading text-4xl md:text-6xl font-bold text-black dark:text-white mb-4 tracking-tight">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-black dark:text-white mb-4 tracking-tight">
               Capabilities<span className="text-secondary-text">.</span>
             </h1>
             <p className="font-body text-xl text-secondary-text max-w-xl">

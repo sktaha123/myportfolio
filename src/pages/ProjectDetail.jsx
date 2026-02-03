@@ -90,7 +90,7 @@ const ProjectDetail = () => {
                                 <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-4">Technologies Used</h4>
                                 <div className="flex flex-wrap gap-2">
                                     {project.tech.map((t, idx) => (
-                                        <span key={`tech-${idx}`} className="px-4 py-2 bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-zinc-200 rounded-lg text-sm font-medium">
+                                        <span key={`tech-${idx}`} className="px-4 py-2 bg-gray-200 dark:bg-zinc-800 text-gray-900 dark:text-zinc-200 rounded-lg text-sm font-medium">
                                             {t}
                                         </span>
                                     ))}
@@ -101,7 +101,7 @@ const ProjectDetail = () => {
                                 href={project.liveLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-lg rounded-xl hover:scale-105 transition-transform gap-3 shadow-xl"
+                                className="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-md md:text-lg rounded-xl hover:scale-105 transition-transform gap-3 shadow-xl"
                             >
                                 <ExternalLink size={20} />
                                 Visit Live Project
