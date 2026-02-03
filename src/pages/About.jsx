@@ -25,7 +25,28 @@ const certificationsData = [
 ];
 
 const About = () => {
-  const [showAll, setShowAll] = useState(false);
+  const [showAllEducation, setShowAllEducation] = useState(false);
+  const [showAllCertifications, setShowAllCertifications] = useState(false);
+
+  const toggleEducation = () => {
+    if (window.innerWidth < 768) {
+      setShowAllEducation(!showAllEducation);
+    } else {
+      const newState = !showAllEducation;
+      setShowAllEducation(newState);
+      setShowAllCertifications(newState);
+    }
+  };
+
+  const toggleCertifications = () => {
+    if (window.innerWidth < 768) {
+      setShowAllCertifications(!showAllCertifications);
+    } else {
+      const newState = !showAllCertifications;
+      setShowAllEducation(newState);
+      setShowAllCertifications(newState);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-primary-bg pt-24 md:pt-32 pb-20 px-6">
@@ -142,7 +163,7 @@ const About = () => {
 
             <div className="flex flex-col gap-8">
               <AnimatePresence mode="popLayout">
-                {educationData.slice(0, showAll ? educationData.length : 1).map((edu, index) => (
+                {educationData.slice(0, showAllEducation ? educationData.length : 1).map((edu, index) => (
                   <motion.div
                     layout
                     key={index}
@@ -175,12 +196,12 @@ const About = () => {
             {educationData.length > 1 && (
               <motion.button
                 layout
-                onClick={() => setShowAll(!showAll)}
+                onClick={toggleEducation}
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 className="mt-6 w-full py-3 flex items-center justify-center gap-2 text-sm font-bold text-gray-500 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/10 rounded-xl transition-colors group"
               >
-                {showAll ? "See Less" : "See More"}
-                {showAll ? (
+                {showAllEducation ? "See Less" : "See More"}
+                {showAllEducation ? (
                   <ChevronUp size={16} className="group-hover:-translate-y-1 transition-transform" />
                 ) : (
                   <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
@@ -206,7 +227,7 @@ const About = () => {
 
             <div className="flex flex-col gap-4">
               <AnimatePresence mode="popLayout">
-                {certificationsData.slice(0, showAll ? certificationsData.length : 2).map((cert, i) => (
+                {certificationsData.slice(0, showAllCertifications ? certificationsData.length : 2).map((cert, i) => (
                   <motion.a
                     layout
                     key={i}
@@ -232,12 +253,12 @@ const About = () => {
             {certificationsData.length > 2 && (
               <motion.button
                 layout
-                onClick={() => setShowAll(!showAll)}
+                onClick={toggleCertifications}
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 className="mt-6 w-full py-3 flex items-center justify-center gap-2 text-sm font-bold text-gray-500 dark:text-zinc-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/10 rounded-xl transition-colors group"
               >
-                {showAll ? "See Less" : "See More"}
-                {showAll ? (
+                {showAllCertifications ? "See Less" : "See More"}
+                {showAllCertifications ? (
                   <ChevronUp size={16} className="group-hover:-translate-y-1 transition-transform" />
                 ) : (
                   <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
